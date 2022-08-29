@@ -1,8 +1,9 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: mini-customer
-  profiles:
-    active: local
   datasource:
     hikari:
       jdbc-url: ${JDBC_URL}
