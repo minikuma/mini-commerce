@@ -1,9 +1,11 @@
 package me.minikuma.domain.address;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import me.minikuma.domain.TimeEntity;
+import me.minikuma.domain.customer.Customer;
 
 import javax.persistence.*;
 
@@ -26,4 +28,13 @@ public class Address extends TimeEntity {
     private String phoneNumber;
     @Column(name = "mobile_number")
     private String mobileNumber;
+
+    @Builder
+    public Address(Long addressId, Long customerId, String zipCode, String phoneNumber, String mobileNumber) {
+        this.customerId = customerId;
+        this.addressId = addressId;
+        this.zipCode = zipCode;
+        this.phoneNumber = phoneNumber;
+        this.mobileNumber = mobileNumber;
+    }
 }

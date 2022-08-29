@@ -1,6 +1,7 @@
 package me.minikuma.domain.payment;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import me.minikuma.domain.TimeEntity;
@@ -26,4 +27,13 @@ public class Payment extends TimeEntity {
     private String accountNumber;
     @Column(name = "expiry")
     private String expiry;
+
+    @Builder
+    public Payment(Long paymentId, Long customerId, String provider, String accountNumber, String expiry) {
+        this.paymentId = paymentId;
+        this.customerId = customerId;
+        this.provider = provider;
+        this.accountNumber = accountNumber;
+        this.expiry = expiry;
+    }
 }

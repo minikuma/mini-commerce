@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class TimeEntity {
-    // TODO: Time Entity 추상 클래스 작성 필요
     @CreatedBy
     private LocalDateTime createdAt;
 

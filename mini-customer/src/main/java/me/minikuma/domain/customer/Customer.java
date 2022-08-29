@@ -1,14 +1,11 @@
 package me.minikuma.domain.customer;
 
-import lombok.*;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import me.minikuma.domain.TimeEntity;
+import me.minikuma.domain.address.Address;
 
 import javax.persistence.*;
 
@@ -27,11 +24,16 @@ public class Customer extends TimeEntity {
     private String passWord;
     @Column(name = "phone_number")
     private String phoneNumber;
+    @OneToOne
+    @JoinColumn(name = "customer_id")
+    private Address address;
 
     @Builder
-    public Customer(String userName, String passWord, String phoneNumber) {
+    public Customer(Long customerId, String userName, String passWord, String phoneNumber, Address address) {
+        this.customerId = customerId;
         this.userName = userName;
         this.passWord = passWord;
         this.phoneNumber = phoneNumber;
+        this.address = address;
     }
 }
