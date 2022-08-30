@@ -1,4 +1,4 @@
-package me.minikuma.repository;
+package me.minikuma.repository.address;
 
 import me.minikuma.domain.address.Address;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,4 +1,4 @@
-package me.minikuma.repository;
+package me.minikuma.repository.customer;
 
 import me.minikuma.domain.customer.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;

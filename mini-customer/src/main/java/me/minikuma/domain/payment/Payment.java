@@ -1,37 +1,42 @@
 package me.minikuma.domain.payment;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import me.minikuma.domain.TimeEntity;
+import me.minikuma.domain.customer.Customer;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-@Table(name = "payment")
 @Entity
-@Getter
+@Getter @Setter
+@Table(name = "PAYMENT")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Payment extends TimeEntity {
+public class Payment extends TimeEntity implements Serializable {
     @Id
-    @Column(name = "paymentId", updatable = false, nullable = false, unique = true)
+    @Column(name = "PAYMENT_ID", updatable = false, nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long paymentId;
-    @Column(name = "customer_id", nullable = false)
-    private Long customerId;
-    @Column(name = "payment_type")
+
+    @Column(name = "PAYMENT_TYPE")
     private String paymentType;
-    @Column(name = "provider")
+
+    @Column(name = "PROVIDER")
     private String provider;
-    @Column(name = "account_number")
+
+    @Column(name = "ACCOUNT_NUMBER")
     private String accountNumber;
-    @Column(name = "expiry")
+
+    @Column(name = "EXPIRY")
     private String expiry;
 
+    @OneToMany(mappedBy = "payment")
+    private List<Customer> customers = new ArrayList<>();
+
     @Builder
-    public Payment(Long paymentId, Long customerId, String provider, String accountNumber, String expiry) {
-        this.paymentId = paymentId;
-        this.customerId = customerId;
+    public Payment(String paymentType, String provider, String accountNumber, String expiry) {
+        this.paymentType = paymentType;
         this.provider = provider;
         this.accountNumber = accountNumber;
         this.expiry = expiry;
