@@ -5,9 +5,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import me.minikuma.domain.TimeEntity;
+import me.minikuma.domain.customer.Customer;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,8 +21,6 @@ public class Address extends TimeEntity implements Serializable {
     @Column(name = "ADDRESS_ID", updatable = false, nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long addressId;
-    @Column(name = "CUSTOMER_ID", nullable = false)
-    private Long customerId;
 
     @Column(name = "ADDRESS")
     private String address;
@@ -30,9 +31,11 @@ public class Address extends TimeEntity implements Serializable {
     @Column(name = "MOBILE_NUMBER")
     private String mobileNumber;
 
+    @OneToMany(mappedBy = "address")
+    private List<Customer> customers = new ArrayList<>();
+
     @Builder
-    public Address(Long customerId, String zipCode, String phoneNumber, String mobileNumber) {
-        this.customerId = customerId;
+    public Address(String zipCode, String phoneNumber, String mobileNumber) {
         this.zipCode = zipCode;
         this.phoneNumber = phoneNumber;
         this.mobileNumber = mobileNumber;
